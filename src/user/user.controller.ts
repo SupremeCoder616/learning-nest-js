@@ -1,12 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
+import { UserService } from './user.service';
 
 @Controller('user') // Decorator
 export class UserController {
+  constructor(private readonly userService: UserService) {} // Injecting the service
   @Get()
   getUser() {
-    return [
-      { id: 1, name: 'John' },
-      { id: 2, name: 'Jane' },
-    ];
+    return this.userService.getAllUser();
+  }
+
+  @Get(':id')
+  getUserById(@Param('id') id: string) {
+    return this.userService.getUserById(Number(id));
   }
 }
