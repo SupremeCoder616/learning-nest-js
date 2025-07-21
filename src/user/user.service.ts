@@ -8,10 +8,11 @@ export class UserService {
   ];
 
   getAllUser() {
-    return this.users;
+    return { isError: false, data: this.users };
   }
 
   getUserById(id: number) {
-    return this.users.find((user) => user.id === id);
+    const userData = this.users.find((user) => user.id === id);
+    return { isError: false, data: userData };
   }
 }
